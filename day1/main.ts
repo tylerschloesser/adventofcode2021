@@ -1,9 +1,5 @@
-import fs from 'fs'
-
-const lines = fs
-  .readFileSync('input.txt', { encoding: 'utf8' })
-  .split('\n')
-  .slice(0, -1) // newline at end of file
+import { readInput } from '../util'
+const lines = readInput()
 
 let data = lines.map((line) => parseInt(line))
 
