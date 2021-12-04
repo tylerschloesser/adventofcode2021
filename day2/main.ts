@@ -2,26 +2,19 @@ import { readInput } from '../util'
 
 const lines = readInput()
 
-const { h, v } = lines.reduce<{ h: number; v: number }>(
+const { h, v } = lines.reduce<{ h: number; v: number; aim: number }>(
   (acc, line) => {
-    let dh = 0
-    let dv = 0
     const [dir, numstr] = line.split(' ')
     const num = parseInt(numstr)
     switch (dir) {
-      case 'forward':
-        dh = num
-        break
       case 'down':
-        dv = num
-        break
+        return { ...acc, aim: acc.aim + num }
       case 'up':
-        dv = -num
-        break
+        return { ...acc, aim: acc.aim - num }
     }
-    return { h: acc.h + dh, v: acc.v + dv }
+    return { ...acc, h: acc.h + num, v: acc.v + acc.aim * num }
   },
-  { h: 0, v: 0 },
+  { h: 0, v: 0, aim: 0 },
 )
 
 console.log(h * v)
