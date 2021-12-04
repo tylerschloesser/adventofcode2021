@@ -7,6 +7,13 @@ const lines = fs
 
 let data = lines.map((line) => parseInt(line))
 
+data = data.reduce<number[]>((acc, _v, i) => {
+  if (i > data.length - 3) {
+    return acc
+  }
+  return [...acc, data[i] + data[i + 1] + data[i + 2]]
+}, [])
+
 const { answer } = data.reduce<{ last: number; answer: number }>(
   ({ last, answer }, v) => {
     if (v > last) {
